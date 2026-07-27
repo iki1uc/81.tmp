@@ -1,16 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>81.tmp – Dreieck System</title>
+</head>
+<body>
+
+<h1>81.tmp – Dreieck System</h1>
+
 <script type="module">
 import { Kernel81 } from "./js/81.kernel.js";
 import { GATE } from "./js/GATE.js";
 import { OrbitSync } from "./js/OrbitSync.js";
+import { Triangle } from "./js/Triangle.js";
 import { RESPO_415 } from "./js/RESPO_81.tmp.js";
 
 Kernel81().then(atom => {
     console.log("ATOM:", atom);
     console.log("GATE:", GATE(atom));
     console.log("ORBIT:", OrbitSync(atom));
+    console.log("TRIANGLE:", Triangle(atom));
 });
 
 RESPO_415().then(r => {
     console.log("RESPO_81.tmp:", r);
 });
 </script>
+
+</body>
+</html>
