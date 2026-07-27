@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>81.tmp – Dreieck System</title>
+    <title>81.tmp – ATOM Dreieck</title>
 </head>
 <body>
 
-<h1>81.tmp – Dreieck System</h1>
+<h1>ATOM Dreieck – 3×81</h1>
+
+<div id="rings"></div>
 
 <script type="module">
-import { Kernel81 } from "./js/81.kernel.js";
-import { GATE } from "./js/GATE.js";
-import { OrbitSync } from "./js/OrbitSync.js";
+import { Kernel81 } from "./js/3x81.js";
+import { Orbit6D } from "./js/Orbit6D.js";
 import { Triangle } from "./js/Triangle.js";
-import { RESPO_415 } from "./js/RESPO_81.tmp.js";
+import { AtomRing } from "./js/AtomRing.js";
+import { _81tmp } from "./js/81tmp.js";
+
+document.getElementById("rings").innerHTML = AtomRing();
 
 Kernel81().then(atom => {
     console.log("ATOM:", atom);
-    console.log("GATE:", GATE(atom));
-    console.log("ORBIT:", OrbitSync(atom));
+    console.log("ORBIT 6D:", Orbit6D(atom));
     console.log("TRIANGLE:", Triangle(atom));
 });
 
-RESPO_415().then(r => {
-    console.log("RESPO_81.tmp:", r);
+_81tmp().then(r => {
+    console.log("81.tmp:", r);
 });
 </script>
 
