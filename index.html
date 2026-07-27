@@ -1,33 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>81.tmp – ATOM Dreieck</title>
-</head>
-<body>
-
-<h1>ATOM Dreieck – 3×81</h1>
-
-<div id="rings"></div>
-
 <script type="module">
-import { Kernel81 } from "./js/3x81.js";
-import { Orbit6D } from "./js/Orbit6D.js";
-import { Triangle } from "./js/Triangle.js";
-import { AtomRing } from "./js/AtomRing.js";
-import { _81tmp } from "./js/81tmp.js";
+import { Kernel3x81 } from "./JS/3x81.kernel.js";
+import { AtomRings4D } from "./JS/AtomRings4D.js";
+import { Orbit24D } from "./JS/Orbit24D.js";
+import { Z_Axis } from "./JS/Z.axis.js";
+import { _81tmp_matrix } from "./JS/81tmp.matrix.js";
+import { InfinityCross } from "./JS/InfinityCross.js";
 
-document.getElementById("rings").innerHTML = AtomRing();
+async function start() {
+    const atom = await Kernel3x81();
 
-Kernel81().then(atom => {
-    console.log("ATOM:", atom);
-    console.log("ORBIT 6D:", Orbit6D(atom));
-    console.log("TRIANGLE:", Triangle(atom));
-});
+    document.body.innerHTML += AtomRings4D();
+    document.body.innerHTML += "<pre>" + JSON.stringify(Orbit24D(atom), null, 2) + "</pre>";
+    document.body.innerHTML += "<pre>" + JSON.stringify(Z_Axis(atom), null, 2) + "</pre>";
+    document.body.innerHTML += "<pre>" + JSON.stringify(await _81tmp_matrix(), null, 2) + "</pre>";
+    document.body.innerHTML += "<pre>" + InfinityCross() + "</pre>";
+}
 
-_81tmp().then(r => {
-    console.log("81.tmp:", r);
-});
+start();
 </script>
-
-</body>
-</html>
