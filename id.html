@@ -1,15 +1,44 @@
-<script src="IDkoop.js"></script>
-<script src="IDneutral.js"></script>
-<script src="IDpook.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ID – 81.tmp System</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #111;
+            color: #eee;
+            padding: 20px;
+        }
+        .box {
+            border: 2px solid #444;
+            padding: 20px;
+            border-radius: 10px;
+            background: #1a1a1a;
+        }
+        h1 {
+            color: #4af;
+        }
+        .item {
+            margin: 10px 0;
+            padding: 10px;
+            background: #222;
+            border-left: 4px solid #4af;
+        }
+    </style>
+</head>
+<body>
 
-<script>
-function showID(mode) {
-    const map = {
-        koop: ID_KOOP,
-        neutral: ID_NEUTRAL,
-        pook: ID_POOK
-    };
-    const id = map[mode];
-    document.getElementById("id-info").innerText = id.info();
-}
-</script>
+<h1>System‑Identität – 81.tmp</h1>
+
+<div class="box">
+    <div class="item"><strong>Name:</strong> 81.tmp</div>
+    <div class="item"><strong>ID:</strong> 415</div>
+    <div class="item"><strong>Typ:</strong> ATOM‑Reaktionsmodul</div>
+    <div class="item"><strong>Achsen:</strong> Elektron / Proton / Neutron</div>
+    <div class="item"><strong>Orbit:</strong> U.orbit</div>
+    <div class="item"><strong>Kernel:</strong> js/3x81.js</div>
+    <div class="item"><strong>Status:</strong> Aktiv</div>
+</div>
+
+</body>
+</html>
