@@ -1,11 +1,8 @@
-// JS/NEU.js
+// NEU.js
+// Dynamische Quelle → ∞‑Formel
 
-export function NEU() {
-    return {
-        status: "ok",
-        level: 1,
-        flux: 0.22,
-        active: true,
-        scoreBase: 0.5
-    };
+export function NEU(atom) {
+    return (
+        (atom.Elektron + atom.Proton + atom.Neutron) ** 0.5
+    );
 }
