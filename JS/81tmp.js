@@ -1,14 +1,40 @@
-import { Kernel81 } from "./3x81.js";
+// 81.tmp – universelle Struktur für jedes Modul
 
-export async function _81tmp() {
-    const atom = await Kernel81();
+module.exports = {
+    X: {
+        route: true,
+        cpu: true,
+        ram: true,
+        gate: true,
+        tor: true,
+        kanal: true,
+        trans: true,
+        slide: true
+    },
 
-    return {
-        "81_A": "Elektron → " + atom.Elektron,
-        "81_B": "Proton → " + atom.Proton,
-        "81_C": "Neutron → " + atom.Neutron,
-        "81_D": "Operator → " + atom.Operator,
-        "81_E": "Orbit → " + atom.Orbit,
-        "81_F": "Länge → " + atom.Elektron.length
-    };
+    Q: {
+        analyze: true,
+        warb: true,
+        chdsk: true,
+        da: true,
+        ne: true,
+        ben: true,
+        koop: true,
+        ppok: true,
+        gegene: true
+    },
+
+    TMP: {
+        cache: true,
+        pool: true,
+        room: true,
+        uroom: true,
+        roomc: true,
+        koop: true,
+        ppok: true,
+        gegene: true,
+        sync: true,
+        prefetch: true,
+        recover: true
+    }
 }
