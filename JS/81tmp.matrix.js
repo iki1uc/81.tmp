@@ -1,4 +1,4 @@
-import { Kernel3x81 } from "./3x81.kernel.js";
+import { Kernel3x81 } from "./real.reaspo.scan.js";
 
 export async function _81tmp_matrix() {
     const atom = await Kernel3x81();
