@@ -27,59 +27,23 @@
 
 <script type="module">
 
-    /* ---------------------------------------------------------
-       MODULE IMPORTS — NUR Wertbemessung
-    --------------------------------------------------------- */
-
-    import { MATRIX_81 } from "./tmp/81.tmp.js";
-    import { UPDATE_81 } from "./tmp/81.score.js";
+    import { UPDATE_STATION } from "./tmp/81.tmp.js";
     import { VIEW_81_MATRIX } from "./tmp/81.viewer.js";
-    import { REAL_REASPO_SCAN } from "./tmp/REAL.tmp.js";
 
-    import * as DA from "./js/DA.js";
-    import * as NE from "./js/NE.js";
-    import * as BEN from "./js/BEN.js";
+    const atom = {
+        Elektron: 3,
+        Proton: 2,
+        Neutron: 1,
+        Orbit: 4
+    };
 
-    /* ---------------------------------------------------------
-       HELPER: Block Renderer
-    --------------------------------------------------------- */
+    UPDATE_STATION(atom);
 
-    function block(title, content) {
-        const div = document.createElement("div");
-        div.className = "block";
-        div.innerHTML = `<h2>${title}</h2><pre>${content}</pre>`;
-        document.body.appendChild(div);
-    }
-
-    /* ---------------------------------------------------------
-       1) DA / NE / BEN anzeigen
-    --------------------------------------------------------- */
-
-    block("DA.js", JSON.stringify(DA, null, 4));
-    block("NE.js", JSON.stringify(NE, null, 4));
-    block("BEN.js", JSON.stringify(BEN, null, 4));
-
-    /* ---------------------------------------------------------
-       2) Beispiel‑Wertbemessung
-    --------------------------------------------------------- */
-
-    UPDATE_81(MATRIX_81, "d1", +1);   // Verbesserung
-    UPDATE_81(MATRIX_81, "e3", -2);   // Verschlechterung
-    UPDATE_81(MATRIX_81, "s7", +3);   // starke Verbesserung
-
-    /* ---------------------------------------------------------
-       3) 81.tmp Score‑Matrix anzeigen
-    --------------------------------------------------------- */
-
-    document.body.appendChild(VIEW_81_MATRIX(MATRIX_81));
-
-    /* ---------------------------------------------------------
-       4) REAL‑REASPO‑SCAN anzeigen
-    --------------------------------------------------------- */
-
-    document.body.appendChild(REAL_REASPO_SCAN());
+    document.body.appendChild(VIEW_81_MATRIX());
 
 </script>
+
+
 
 </body>
 </html>
