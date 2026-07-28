@@ -1,7 +1,10 @@
-export const REAL_DATA = {
-    active: true,
-    cpu: 0.63,
-    mem: 0.41,
-    route: "stable",
-    tmp: 0.22
-};
+// NE.js
+// REAL‑Quelle → ∞‑Formel
+
+export function NE(atom) {
+    return (
+        atom.Elektron * 0.33 +
+        atom.Proton   * 0.22 +
+        atom.Neutron  * 0.11
+    );
+}
