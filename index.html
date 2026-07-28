@@ -8,31 +8,57 @@ import * as Hyper81 from "./JS/81tmp.hyper.js";
 import * as InfinityCross from "./JS/InfinityCrossSVG.js";
 
 async function start() {
+
     // 1) Kernel prüfen
-    const atom = await K81.Kernel3x81?.();
+    const atom = await (K81.Kernel3x81 || K81.Kernel81 || K81.default)?.();
     if (!atom) {
-        console.error("Kernel3x81 returned NULL → 81.tmp cannot run.");
+        document.body.innerHTML += "<pre>❌ Kernel3x81 / Kernel81 nicht gefunden</pre>";
         return;
     }
 
     // 2) Rings
-    document.body.innerHTML += Rings5D.AtomRings5D?.() ?? "<pre>AtomRings5D missing</pre>";
+    if (Rings5D.AtomRings5D) {
+        document.body.innerHTML += Rings5D.AtomRings5D();
+    } else {
+        document.body.innerHTML += "<pre>❌ AtomRings5D missing</pre>";
+    }
 
     // 3) Orbit
-    document.body.innerHTML += "<pre>" + JSON.stringify(Orbit.Orbit48D?.(atom) ?? "Orbit48D missing", null, 2) + "</pre>";
+    if (Orbit.Orbit48D) {
+        document.body.innerHTML += "<pre>" + JSON.stringify(Orbit.Orbit48D(atom), null, 2) + "</pre>";
+    } else {
+        document.body.innerHTML += "<pre>❌ Orbit48D missing</pre>";
+    }
 
     // 4) Z-Axis
-    document.body.innerHTML += "<pre>" + JSON.stringify(ZAxis.Z_Axis?.(atom) ?? "Z_Axis missing", null, 2) + "</pre>";
+    if (ZAxis.Z_Axis) {
+        document.body.innerHTML += "<pre>" + JSON.stringify(ZAxis.Z_Axis(atom), null, 2) + "</pre>";
+    } else {
+        document.body.innerHTML += "<pre>❌ Z_Axis missing</pre>";
+    }
 
     // 5) V-Axis
-    document.body.innerHTML += "<pre>" + JSON.stringify(VAxis.V_Axis?.(atom) ?? "V_Axis missing", null, 2) + "</pre>";
+    if (VAxis.V_Axis) {
+        document.body.innerHTML += "<pre>" + JSON.stringify(VAxis.V_Axis(atom), null, 2) + "</pre>";
+    } else {
+        document.body.innerHTML += "<pre>❌ V_Axis missing</pre>";
+    }
 
     // 6) 81.tmp HyperMatrix
-    const hyper = await Hyper81._81tmp_HyperMatrix?.();
-    document.body.innerHTML += "<pre>" + JSON.stringify(hyper ?? "81tmp HyperMatrix missing", null, 2) + "</pre>";
+    if (Hyper81._81tmp_HyperMatrix) {
+        const hyper = await Hyper81._81tmp_HyperMatrix();
+        document.body.innerHTML += "<pre>" + JSON.stringify(hyper, null, 2) + "</pre>";
+    } else {
+        document.body.innerHTML += "<pre>❌ 81tmp HyperMatrix missing</pre>";
+    }
 
-    // 7) Infinity Cross
-    document.body.innerHTML += InfinityCross.InfinityCrossSVG?.() ?? "<pre>InfinityCrossSVG missing</pre>";
+    // 7) Infinity Cross (SVG)
+    if (InfinityCross.InfinityCrossSVG) {
+        const svg = InfinityCross.InfinityCrossSVG();
+        document.body.innerHTML += svg.outerHTML || svg;
+    } else {
+        document.body.innerHTML += "<pre>❌ InfinityCrossSVG missing</pre>";
+    }
 }
 
 start();
