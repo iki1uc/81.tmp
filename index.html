@@ -1,148 +1,24 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>81.tmp · REAL-SCAN System</title>
-    <style>
-        body {
-            background: #000;
-            color: #eee;
-            font-family: Consolas, monospace;
-            padding: 20px;
-        }
-        .block {
-            background: #111;
-            border: 1px solid #333;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        h2 {
-            color: #6cf;
-        }
-    </style>
-</head>
+export function REAL_REASPO_SCAN() {
 
-<body>
-
-<script type="module">
-
-/* ---------------------------------------------------------
-   MODULE IMPORTS — ALLE müssen existieren
---------------------------------------------------------- */
-
-import * as Kernel from "./JS/3x81.js";                 // MUSS 3x81.js heißen
-import * as Orbit48D from "./JS/Orbit48D.js";
-import * as Rings5D from "./JS/AtomRings5D.js";
-import * as ZAxis from "./JS/Z.axis.js";
-import * as VAxis from "./JS/V.axis.js";
-import * as Hyper81 from "./JS/81tmp.hyper.js";
-import * as InfinityCross from "./JS/InfinityCrossSVG.js";
-import { REAL_REASPO_SCAN } from "./JS/real.reaspo.scan.js";   // dein neues Modul
-
-
-/* ---------------------------------------------------------
-   BLOCK RENDER HELPER
---------------------------------------------------------- */
-
-function block(title, content) {
     const div = document.createElement("div");
-    div.className = "block";
-    div.innerHTML = `<h2>${title}</h2><pre>${content}</pre>`;
-    document.body.appendChild(div);
+    div.style.background = "#111";
+    div.style.color = "#eee";
+    div.style.padding = "20px";
+    div.style.margin = "20px 0";
+    div.style.border = "1px solid #333";
+
+    div.innerHTML = `
+        <h2>REAL · REASPO · SCAN</h2>
+
+        <h3>REAL (Echtzeit)</h3>
+        <pre>${JSON.stringify(structure.X, null, 4)}</pre>
+
+        <h3>REASPO (Response)</h3>
+        <pre>${JSON.stringify(structure.Q, null, 4)}</pre>
+
+        <h3>SCAN (Analyse)</h3>
+        <pre>${JSON.stringify(structure.TMP, null, 4)}</pre>
+    `;
+
+    return div;
 }
-
-
-/* ---------------------------------------------------------
-   START FUNCTION
---------------------------------------------------------- */
-
-async function start() {
-
-    /* -------------------------
-       1) Kernel laden
-    ------------------------- */
-    const kernelFn = Kernel.Kernel3x81 || Kernel.Kernel81 || Kernel.default;
-
-    if (!kernelFn) {
-        block("❌ Kernel Fehler", "Kernel3x81 / Kernel81 nicht gefunden");
-        return;
-    }
-
-    const atom = await kernelFn();
-    block("Kernel Output", JSON.stringify(atom, null, 2));
-
-
-    /* -------------------------
-       2) REAL · REASPO · SCAN
-    ------------------------- */
-    document.body.appendChild(REAL_REASPO_SCAN());
-
-
-    /* -------------------------
-       3) REAL-SCAN-Radar
-    ------------------------- */
-    block("REAL-SCAN-Radar", JSON.stringify({
-        Elektron: atom.Elektron,
-        Proton: atom.Proton,
-        Neutron: atom.Neutron
-    }, null, 2));
-
-
-    /* -------------------------
-       4) REAL-SCAN-Orbit
-    ------------------------- */
-    if (Orbit48D.Orbit48D) {
-        const orbit = Orbit48D.Orbit48D(atom);
-        block("REAL-SCAN-Orbit", JSON.stringify(orbit, null, 2));
-    } else {
-        block("❌ Orbit48D fehlt", "");
-    }
-
-
-    /* -------------------------
-       5) REAL-SCAN-81e-Matrix
-    ------------------------- */
-    if (Hyper81._81tmp_HyperMatrix) {
-        const hyper = await Hyper81._81tmp_HyperMatrix();
-        block("REAL-SCAN-81e-Matrix", JSON.stringify(hyper, null, 2));
-    } else {
-        block("❌ 81tmp HyperMatrix fehlt", "");
-    }
-
-
-    /* -------------------------
-       6) REAL-SCAN-HyperMatrix
-    ------------------------- */
-    if (ZAxis.Z_Axis && VAxis.V_Axis) {
-        const z = ZAxis.Z_Axis(atom);
-        const v = VAxis.V_Axis(atom);
-
-        block("REAL-SCAN-HyperMatrix (Z/V)", JSON.stringify({
-            Z_Axis: z,
-            V_Axis: v
-        }, null, 2));
-    } else {
-        block("❌ Z.axis oder V.axis fehlt", "");
-    }
-
-
-    /* -------------------------
-       7) InfinityCross SVG
-    ------------------------- */
-    if (InfinityCross.InfinityCrossSVG) {
-        const svg = InfinityCross.InfinityCrossSVG();
-        const div = document.createElement("div");
-        div.className = "block";
-        div.innerHTML = `<h2>InfinityCrossSVG</h2>${svg.outerHTML || svg}`;
-        document.body.appendChild(div);
-    } else {
-        block("❌ InfinityCrossSVG fehlt", "");
-    }
-}
-
-start();
-
-</script>
-
-</body>
-</html>
