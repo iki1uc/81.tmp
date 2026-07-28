@@ -39,3 +39,6 @@ export function VIEW_81_MATRIX(matrix) {
 
     return div;
 }
+import matrix81 from "./81.room.js";
+
+document.body.appendChild(VIEW_81_MATRIX(matrix81));
