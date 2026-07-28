@@ -27,19 +27,24 @@
 
 <script type="module">
 
-    import { UPDATE_STATION } from "./tmp/81.tmp.js";
-    import { VIEW_81_MATRIX } from "./tmp/81.viewer.js";
+  
 
-    const atom = {
-        Elektron: 3,
-        Proton: 2,
-        Neutron: 1,
-        Orbit: 4
-    };
+    import { ROOT_81 } from "./ROOT.scan.js";
 
-    UPDATE_STATION(atom);
+    const files = [
+        "BEN.tmp", "C.tmp", "DA.tmp", "NE.tmp",
+        "X.tmp", "Z.tmp", "pipeline.room",
+        "ROOT.html", "index.html"
+    ];
 
-    document.body.appendChild(VIEW_81_MATRIX());
+    const out = ROOT_81(files);
+
+    document.body.innerHTML = `
+        <h1>ROOT‑RESPO: ${out.ROOT}</h1>
+        <h2>81‑SCAN Status: ${out.SCAN.status}</h2>
+        <pre>${JSON.stringify(out.SCAN, null, 2)}</pre>
+    `;
+
 
 </script>
 
