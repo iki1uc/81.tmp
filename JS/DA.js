@@ -1,7 +1,9 @@
-export const HDF_DATA = {
-    status: "ok",
-    load: 0.82,
-    integrity: 0.94,
-    flux: 0.12,
-    error: false
-};
+// DA.js
+// HDF‑Quelle → ∞‑Formel
+
+export function DA(atom) {
+    return (
+        (atom.Proton + atom.Neutron) /
+        (atom.Elektron + 1)
+    );
+}
