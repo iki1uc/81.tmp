@@ -1,16 +1,7 @@
-div.innerHTML = `
-REAL · REASPO · SCAN
-REAL (Echtzeit)
-${JSON.stringify(structure.X, null, 4)}
-REASPO (Response)
-${JSON.stringify(structure.Q, null, 4)}
-SCAN (Analyse)
-${JSON.stringify(structure.TMP, null, 4)}
-`;
-REAL · REASPO · SCAN
-REAL (Echtzeit)
-{ … }
-REASPO (Response)
-{ … }
-SCAN (Analyse)
-{ … }
+export const HDF_DATA = {
+    status: "ok",
+    load: 0.82,
+    integrity: 0.94,
+    flux: 0.12,
+    error: false
+};
