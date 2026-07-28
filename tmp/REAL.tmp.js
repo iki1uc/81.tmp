@@ -1,15 +1,15 @@
-import { MATRIX_81 } from "./81.tmp.js";
-import { UPDATE_81 } from "./81.score.js";
-import { VIEW_81_MATRIX } from "./81.viewer.js";
+// tmp/REAL.tmp.js
 
-export function REAL_REASPO_SCAN() {
+import { UPDATE_STATION } from "./81.tmp.js";
 
-    UPDATE_81(MATRIX_81, "d1", +1);
-    UPDATE_81(MATRIX_81, "e3", -2);
-    UPDATE_81(MATRIX_81, "s7", +3);
+export function REAL_REASPO_SCAN(atom) {
 
-    const div = document.createElement("div");
-    div.appendChild(VIEW_81_MATRIX(MATRIX_81));
+    UPDATE_STATION(atom);
 
-    return div;
+    return {
+        W: MATRIX_81.W,
+        S: MATRIX_81.S,
+        A: MATRIX_81.A,
+        D: MATRIX_81.D
+    };
 }
