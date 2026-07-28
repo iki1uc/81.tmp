@@ -1,16 +1,12 @@
-export function UPDATE_81(matrix, station, value) {
+// tmp/81.score.js
 
-    const item = matrix[station];
-    if (!item) return;
+import { MATRIX_81 } from "./81.tmp.js";
 
-    const oldScore = item.score;
-    const newScore = oldScore + value;
-
-    item.delta = newScore - oldScore;
-    item.score = newScore;
-
-    item.rew = (item.delta > 0) ? +1 : (item.delta < 0) ? -1 : 0;
-    item.yes = (item.score > 0);
-
-    return item;
+export function SCORE() {
+    return (
+        MATRIX_81.W +
+        MATRIX_81.S +
+        MATRIX_81.A +
+        MATRIX_81.D
+    );
 }
