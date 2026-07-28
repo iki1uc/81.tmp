@@ -1,5 +1,5 @@
 // Neue Version – 81.tmp kompatibel
-import { Kernel81 } from "./3x81.js";
+import { Kernel81 } from "./real.reaspo.scan.js";
 import structure from "./81.tmp.js";
 
 export async function _81tmp() {
