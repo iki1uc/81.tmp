@@ -1,0 +1,42 @@
+export function REAL_SCAN_AUTO_REFRESH() {
+    setInterval(() => {
+        document.body.appendChild(REAL_REASPO_SCAN());
+    }, 3000);
+}
+export function TMP_INSPECTOR(structure) {
+
+    const div = document.createElement("div");
+    div.className = "tmp-inspector";
+
+    div.innerHTML = `
+        <style>
+            .tmp-inspector {
+                background:#111;
+                color:#eee;
+                padding:20px;
+                border:1px solid #555;
+                margin:20px 0;
+            }
+            .tmp-inspector h2 { color:#f0f; }
+            .tmp-grid {
+                display:grid;
+                grid-template-columns:repeat(3,1fr);
+                gap:10px;
+            }
+            .tmp-cell {
+                background:#000;
+                padding:10px;
+                border-left:4px solid #f0f;
+            }
+        </style>
+
+        <h2>TMP‑INSPECTOR</h2>
+        <div class="tmp-grid">
+            ${Object.keys(structure.TMP).map(k => `
+                <div class="tmp-cell">${k}: ${structure.TMP[k]}</div>
+            `).join("")}
+        </div>
+    `;
+
+    return div;
+}
