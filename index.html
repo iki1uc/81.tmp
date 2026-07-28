@@ -7,57 +7,70 @@ import * as VAxis from "./JS/V.axis.js";
 import * as Hyper81 from "./JS/81tmp.hyper.js";
 import * as InfinityCross from "./JS/InfinityCrossSVG.js";
 
+function block(title, content) {
+    const div = document.createElement("div");
+    div.style.background = "#111";
+    div.style.border = "1px solid #333";
+    div.style.padding = "20px";
+    div.style.margin = "20px 0";
+    div.innerHTML = `<h2>${title}</h2><pre>${content}</pre>`;
+    document.body.appendChild(div);
+}
+
 async function start() {
 
     // 1) Kernel prüfen
-    const atom = await (K81.Kernel3x81 || K81.Kernel81 || K81.default)?.();
-    if (!atom) {
-        document.body.innerHTML += "<pre>❌ Kernel3x81 / Kernel81 nicht gefunden</pre>";
+    const kernelFn = K81.Kernel3x81 || K81.Kernel81 || K81.default;
+    if (!kernelFn) {
+        block("❌ Kernel Fehler", "Kernel3x81 / Kernel81 nicht gefunden");
         return;
     }
 
+    const atom = await kernelFn();
+    block("Kernel Output", JSON.stringify(atom, null, 2));
+
     // 2) Rings
     if (Rings5D.AtomRings5D) {
-        document.body.innerHTML += Rings5D.AtomRings5D();
+        block("AtomRings5D", Rings5D.AtomRings5D());
     } else {
-        document.body.innerHTML += "<pre>❌ AtomRings5D missing</pre>";
+        block("❌ AtomRings5D", "Modul fehlt");
     }
 
     // 3) Orbit
     if (Orbit.Orbit48D) {
-        document.body.innerHTML += "<pre>" + JSON.stringify(Orbit.Orbit48D(atom), null, 2) + "</pre>";
+        block("Orbit48D", JSON.stringify(Orbit.Orbit48D(atom), null, 2));
     } else {
-        document.body.innerHTML += "<pre>❌ Orbit48D missing</pre>";
+        block("❌ Orbit48D", "Modul fehlt");
     }
 
     // 4) Z-Axis
     if (ZAxis.Z_Axis) {
-        document.body.innerHTML += "<pre>" + JSON.stringify(ZAxis.Z_Axis(atom), null, 2) + "</pre>";
+        block("Z_Axis", JSON.stringify(ZAxis.Z_Axis(atom), null, 2));
     } else {
-        document.body.innerHTML += "<pre>❌ Z_Axis missing</pre>";
+        block("❌ Z_Axis", "Modul fehlt");
     }
 
     // 5) V-Axis
     if (VAxis.V_Axis) {
-        document.body.innerHTML += "<pre>" + JSON.stringify(VAxis.V_Axis(atom), null, 2) + "</pre>";
+        block("V_Axis", JSON.stringify(VAxis.V_Axis(atom), null, 2));
     } else {
-        document.body.innerHTML += "<pre>❌ V_Axis missing</pre>";
+        block("❌ V_Axis", "Modul fehlt");
     }
 
-    // 6) 81.tmp HyperMatrix
+    // 6) HyperMatrix
     if (Hyper81._81tmp_HyperMatrix) {
         const hyper = await Hyper81._81tmp_HyperMatrix();
-        document.body.innerHTML += "<pre>" + JSON.stringify(hyper, null, 2) + "</pre>";
+        block("81tmp HyperMatrix", JSON.stringify(hyper, null, 2));
     } else {
-        document.body.innerHTML += "<pre>❌ 81tmp HyperMatrix missing</pre>";
+        block("❌ HyperMatrix", "Modul fehlt");
     }
 
-    // 7) Infinity Cross (SVG)
+    // 7) InfinityCrossSVG
     if (InfinityCross.InfinityCrossSVG) {
         const svg = InfinityCross.InfinityCrossSVG();
-        document.body.innerHTML += svg.outerHTML || svg;
+        block("InfinityCrossSVG", svg.outerHTML || svg);
     } else {
-        document.body.innerHTML += "<pre>❌ InfinityCrossSVG missing</pre>";
+        block("❌ InfinityCrossSVG", "Modul fehlt");
     }
 }
 
