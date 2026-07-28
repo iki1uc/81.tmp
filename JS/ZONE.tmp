@@ -1,1 +1,11 @@
+// ZONE.tmp
+// Orbit‑Zone‑Modul für 81.tmp
+
+export function ZONE(atom) {
+    return {
+        zone: atom.Orbit % 9,
+        layer: Math.floor(atom.Orbit / 9),
+        text: `ZONE-${atom.Orbit % 9}-L${Math.floor(atom.Orbit / 9)}`
+    };
+}
 
