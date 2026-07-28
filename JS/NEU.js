@@ -1,29 +1,11 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>81.tmp · REAL‑RESPO‑System</title>
-</head>
+// JS/NEU.js
 
-<body>
-
-<script type="module">
-    import { MATRIX_81 } from "../tmp/81.tmp.js";
-    import { UPDATE_81 } from "../tmp/81.score.js";
-    import { VIEW_81_MATRIX } from "../tmp/81.viewer.js";
-    import { REAL_REASPO_SCAN } from "../tmp/REAL.tmp.js";
-
-    // Beispiel‑Updates
-    UPDATE_81(MATRIX_81, "d1", +1);
-    UPDATE_81(MATRIX_81, "e3", -2);
-    UPDATE_81(MATRIX_81, "s7", +3);
-
-    // 81‑Matrix anzeigen
-    document.body.appendChild(VIEW_81_MATRIX(MATRIX_81));
-
-    // REAL‑REASPO‑SCAN anzeigen
-    document.body.appendChild(REAL_REASPO_SCAN());
-</script>
-
-</body>
-</html>
+export function NEU() {
+    return {
+        status: "ok",
+        level: 1,
+        flux: 0.22,
+        active: true,
+        scoreBase: 0.5
+    };
+}
