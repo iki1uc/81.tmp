@@ -10,7 +10,7 @@ export function REAL_REASPO_SCAN() {
     div.style.margin = "20px 0";
     div.style.border = "1px solid #333";
 
-    div.innerHTML = `
+    div.innerHTML =  
         <h2>REAL · REASPO · SCAN</h2>
 
         <h3>REAL (Echtzeit)</h3>
