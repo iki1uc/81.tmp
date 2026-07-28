@@ -2,27 +2,83 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>81.tmp · REAL‑RESPO‑System</title>
+    <title>81.tmp · Wertbemessung</title>
+
+    <style>
+        body {
+            background:#000;
+            color:#eee;
+            font-family:Consolas, monospace;
+            padding:20px;
+        }
+        h1 { color:#6cf; }
+        .block {
+            background:#111;
+            border:1px solid #333;
+            padding:20px;
+            margin:20px 0;
+        }
+    </style>
 </head>
 
 <body>
 
+<h1>81.tmp · Wertbemessung · REAL‑RESPO‑System</h1>
+
 <script type="module">
+
+    /* ---------------------------------------------------------
+       MODULE IMPORTS — NUR Wertbemessung
+    --------------------------------------------------------- */
+
     import { MATRIX_81 } from "./tmp/81.tmp.js";
     import { UPDATE_81 } from "./tmp/81.score.js";
     import { VIEW_81_MATRIX } from "./tmp/81.viewer.js";
     import { REAL_REASPO_SCAN } from "./tmp/REAL.tmp.js";
 
-    // Beispiel‑Updates
-    UPDATE_81(MATRIX_81, "d1", +1);
-    UPDATE_81(MATRIX_81, "e3", -2);
-    UPDATE_81(MATRIX_81, "s7", +3);
+    import * as DA from "./js/DA.js";
+    import * as NE from "./js/NE.js";
+    import * as BEN from "./js/BEN.js";
 
-    // 81‑Matrix anzeigen
+    /* ---------------------------------------------------------
+       HELPER: Block Renderer
+    --------------------------------------------------------- */
+
+    function block(title, content) {
+        const div = document.createElement("div");
+        div.className = "block";
+        div.innerHTML = `<h2>${title}</h2><pre>${content}</pre>`;
+        document.body.appendChild(div);
+    }
+
+    /* ---------------------------------------------------------
+       1) DA / NE / BEN anzeigen
+    --------------------------------------------------------- */
+
+    block("DA.js", JSON.stringify(DA, null, 4));
+    block("NE.js", JSON.stringify(NE, null, 4));
+    block("BEN.js", JSON.stringify(BEN, null, 4));
+
+    /* ---------------------------------------------------------
+       2) Beispiel‑Wertbemessung
+    --------------------------------------------------------- */
+
+    UPDATE_81(MATRIX_81, "d1", +1);   // Verbesserung
+    UPDATE_81(MATRIX_81, "e3", -2);   // Verschlechterung
+    UPDATE_81(MATRIX_81, "s7", +3);   // starke Verbesserung
+
+    /* ---------------------------------------------------------
+       3) 81.tmp Score‑Matrix anzeigen
+    --------------------------------------------------------- */
+
     document.body.appendChild(VIEW_81_MATRIX(MATRIX_81));
 
-    // REAL‑REASPO‑SCAN anzeigen
+    /* ---------------------------------------------------------
+       4) REAL‑REASPO‑SCAN anzeigen
+    --------------------------------------------------------- */
+
     document.body.appendChild(REAL_REASPO_SCAN());
+
 </script>
 
 </body>
