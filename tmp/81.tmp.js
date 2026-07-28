@@ -1,12 +1,14 @@
-export const MATRIX_81 = {
-    d1: { zone:"TMP.a", score:0, rew:0, yes:false, delta:0 },
-    d2: { zone:"TMP.e", score:0, rew:0, yes:false, delta:0 },
-    d3: { zone:"TMP.i", score:0, rew:0, yes:false, delta:0 },
-    d4: { zone:"TMP.n", score:0, rew:0, yes:false, delta:0 },
-    d5: { zone:"TMP.o", score:0, rew:0, yes:false, delta:0 },
-    d6: { zone:"TMP.r", score:0, rew:0, yes:false, delta:0 },
-    d7: { zone:"TMP.s", score:0, rew:0, yes:false, delta:0 },
-    d8: { zone:"TMP.u", score:0, rew:0, yes:false, delta:0 },
-    d9: { zone:"TMP.w", score:0, rew:0, yes:false, delta:0 }
-    // … weiter bis w9
-};
+// tmp/81.tmp.js
+
+import { Station } from "../JS/station.wsad.js";
+
+export const MATRIX_81 = {};
+
+export function UPDATE_STATION(atom) {
+    const v = Station(atom);
+
+    MATRIX_81.W = v.W;
+    MATRIX_81.S = v.S;
+    MATRIX_81.A = v.A;
+    MATRIX_81.D = v.D;
+}
