@@ -1,9 +1,27 @@
-export async function Kernel3x81() {
-    const Elektron = await fetch("./x.tmp").then(r => r.text());
-    const Proton   = await fetch("./q.tmp").then(r => r.text());
-    const Operator = await fetch("./operator.tmp").then(r => r.text());
-    const Orbit    = await fetch("./U/81.tmp").then(r => r.text());
-    const Neutron  = await fetch("./U/81.tmp").then(r => r.text());
+// REAL-REASPO-SCAN Modul
+import structure from "./81.tmp.js";
 
-    return { Elektron, Proton, Neutron, Operator, Orbit };
+export function REAL_REASPO_SCAN() {
+
+    const div = document.createElement("div");
+    div.style.background = "#111";
+    div.style.color = "#eee";
+    div.style.padding = "20px";
+    div.style.margin = "20px 0";
+    div.style.border = "1px solid #333";
+
+    div.innerHTML = `
+        <h2>REAL · REASPO · SCAN</h2>
+
+        <h3>REAL (Echtzeit)</h3>
+        <pre>${JSON.stringify(structure.X, null, 4)}</pre>
+
+        <h3>REASPO (Response)</h3>
+        <pre>${JSON.stringify(structure.Q, null, 4)}</pre>
+
+        <h3>SCAN (Analyse)</h3>
+        <pre>${JSON.stringify(structure.TMP, null, 4)}</pre>
+    `;
+
+    return div;
 }
