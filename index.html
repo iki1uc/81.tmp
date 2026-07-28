@@ -1,21 +1,38 @@
 <script type="module">
-import { Kernel3x81 } from "./JS/3×81.js";
-import { AtomRings5D } from "./JS/AtomRings5D.js";
-import { Orbit48D } from "./JS/Orbit48D.js";
-import { Z_Axis } from "./JS/Z.axis.js";
-import { V_Axis } from "./JS/V.axis.js";
-import { _81tmp_HyperMatrix } from "./JS/81tmp.hyper.js";
-import { InfinityCrossSVG } from "./JS/InfinityCrossSVG.js";
+import * as K81 from "./JS/3x81.js";
+import * as Rings5D from "./JS/AtomRings5D.js";
+import * as Orbit from "./JS/Orbit48D.js";
+import * as ZAxis from "./JS/Z.axis.js";
+import * as VAxis from "./JS/V.axis.js";
+import * as Hyper81 from "./JS/81tmp.hyper.js";
+import * as InfinityCross from "./JS/InfinityCrossSVG.js";
 
 async function start() {
-    const atom = await Kernel3x81();
+    // 1) Kernel prüfen
+    const atom = await K81.Kernel3x81?.();
+    if (!atom) {
+        console.error("Kernel3x81 returned NULL → 81.tmp cannot run.");
+        return;
+    }
 
-    document.body.innerHTML += AtomRings5D();
-    document.body.innerHTML += "<pre>" + JSON.stringify(Orbit48D(atom), null, 2) + "</pre>";
-    document.body.innerHTML += "<pre>" + JSON.stringify(Z_Axis(atom), null, 2) + "</pre>";
-    document.body.innerHTML += "<pre>" + JSON.stringify(V_Axis(atom), null, 2) + "</pre>";
-    document.body.innerHTML += "<pre>" + JSON.stringify(await _81tmp_HyperMatrix(), null, 2) + "</pre>";
-    document.body.innerHTML += InfinityCrossSVG();
+    // 2) Rings
+    document.body.innerHTML += Rings5D.AtomRings5D?.() ?? "<pre>AtomRings5D missing</pre>";
+
+    // 3) Orbit
+    document.body.innerHTML += "<pre>" + JSON.stringify(Orbit.Orbit48D?.(atom) ?? "Orbit48D missing", null, 2) + "</pre>";
+
+    // 4) Z-Axis
+    document.body.innerHTML += "<pre>" + JSON.stringify(ZAxis.Z_Axis?.(atom) ?? "Z_Axis missing", null, 2) + "</pre>";
+
+    // 5) V-Axis
+    document.body.innerHTML += "<pre>" + JSON.stringify(VAxis.V_Axis?.(atom) ?? "V_Axis missing", null, 2) + "</pre>";
+
+    // 6) 81.tmp HyperMatrix
+    const hyper = await Hyper81._81tmp_HyperMatrix?.();
+    document.body.innerHTML += "<pre>" + JSON.stringify(hyper ?? "81tmp HyperMatrix missing", null, 2) + "</pre>";
+
+    // 7) Infinity Cross
+    document.body.innerHTML += InfinityCross.InfinityCrossSVG?.() ?? "<pre>InfinityCrossSVG missing</pre>";
 }
 
 start();
