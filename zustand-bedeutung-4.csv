@@ -1,0 +1,5 @@
+﻿Zustand,Bedeutung,Wirkung
+help,leichte Abweichung,−1 ECO
+miss,Daten fehlen,−3 ECO
+error,falsche Daten,−5 ECO
+fail,Hebel bricht,−7 ECO
