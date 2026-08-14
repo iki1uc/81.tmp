@@ -1,7 +1,4 @@
-{
-  "id": "E",
-  "type": "dock",
-  "axis": 1,
-  "value": "error"
-}
-
+AXIS:E
+ROLE:energy
+STATE:active
+VALUE:3
