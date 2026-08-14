@@ -1,7 +1,4 @@
-{
-  "id": "S",
-  "type": "dock",
-  "axis": 5,
-  "value": "scan"
-}
-
+AXIS:S
+ROLE:structure
+STATE:active
+VALUE:7
