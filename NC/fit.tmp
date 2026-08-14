@@ -1,2 +1,4 @@
-{ "fit": true, "level": "optimize", "mode": "auto" }
-
+FIT:alignment
+STATE:active
+TARGET:tmp.*
+MODE:auto
