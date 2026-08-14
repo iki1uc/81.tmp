@@ -1,1 +1,5 @@
+ZONE:C
+ROLE:core-zone
+STATE:open
+LINK:NC.mode
 
