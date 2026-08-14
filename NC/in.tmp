@@ -1,2 +1,4 @@
-{ "vector": "-Z", "dir": "in", "dim": 6 }
-
+IN:signal
+TYPE:core
+STATE:accepted
+FLOW:to arg.tmp
