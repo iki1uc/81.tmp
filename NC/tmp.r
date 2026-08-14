@@ -1,7 +1,4 @@
-{
-  "id": "r",
-  "type": "dock",
-  "axis": 3,
-  "value": "ghost"
-}
-
+AXIS:R
+ROLE:reach
+STATE:active
+VALUE:6
