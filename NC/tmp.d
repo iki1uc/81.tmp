@@ -1,7 +1,4 @@
-{
-  "id": "d",
-  "type": "dock",
-  "axis": 2,
-  "value": "help"
-}
-
+AXIS:D
+ROLE:dimension
+STATE:active
+VALUE:2
