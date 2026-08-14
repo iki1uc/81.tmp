@@ -1,2 +1,3 @@
-{ "help": true, "level": "assist", "fix": true }
-
+HELP:module
+STATE:ready
+INFO:assist tmp-system
