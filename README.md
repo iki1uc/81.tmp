@@ -1,21 +1,38 @@
-# ALL · Master-Sortierer · iki1uc
+# 81.tmp · NC-System
 
-ALL ist die Oberstation des iki1uc-Systems.
-Sie erzeugt die QI/IQQ-Master-Matrix und sortiert alle RESPO-Module
-zu einer funktionalen Einheit.
+Das Verzeichnis **81.tmp/NC/** bildet den Neutral-Core (NC) des 81.tmp-Systems.
+Alle Dateien sind fest definiert und übernehmen klar getrennte Rollen.
 
-──────────────────────────────────────────────
-## Funktionen
+## LOOP-Ebene
+- 1.loop  → Initialisierung
+- 2.loop  → Fluss / Aktivierung
+- 3.loop  → Prüfung / Kontrolle
+- 4.loop  → Delta / Änderung
+- 8.loop  → Orbit / Rotation
+- 9.loop  → Finalisierung
 
-- QI-Schaltung (Index)
-- IQQ-Schaltung (3-Zustände)
-- 9×9 Master-Matrix
-- Vorsortierung aller RESPO-Module
-- Einheitliche Basis für CUBE-MIND, META-CORE, 81×81
+## NC-Modus
+- NC.mode → Neutral-Core Betriebsmodus
 
-──────────────────────────────────────────────
-## Dateien
+## Zonen
+- c.zone → Core-Zone für NC-Steuerung
 
-- ALL.core.js – Masterengine
-- id.html – ALL-Stempel
-- index.html – ALL-Matrix + Sortierung
+## TMP-Module
+- arg.tmp → Argumenteingang
+- in.tmp  → Eingangssignal
+- fit.tmp → Anpassungsmodul
+- help.tmp → Hilfsmodul
+- up.tmp → Update-Modul
+
+## TMP-Achsen (fixe Buchstaben)
+- tmp.a → Basisachse
+- tmp.d → Dimensionsachse
+- tmp.e → Energieachse
+- tmp.i → Inputachse
+- tmp.o → Orbitachse
+- tmp.r → Reichweitenachse
+- tmp.s → Strukturachse
+- tmp.w → Wellenachse
+
+Alle Achsen und Module arbeiten zusammen, um den Neutral-Core vollständig
+und geschlossen zu halten. Das System ist 360° harmonisiert.
