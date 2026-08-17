@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ATALARDAN · ATLANTIK TECH · NC · 81.tmp</title>
+<div id="a81-status">A81CACHE: 0 · RESPO: 100</div>
 
 <style>
 :root {
@@ -744,3 +745,130 @@ setTimeout(function() {
 </script>
 </body>
 </html>
+<script>
+// ===============================
+// A81-FUSION-CONTROLLER
+// ===============================
+
+// --- A81CACHE ---
+const A81CACHE = {
+    cache: [],
+    lastUpdate: null,
+    write(entry) {
+        this.cache.push(entry);
+        this.lastUpdate = Date.now();
+    },
+    read() {
+        return this.cache;
+    }
+};
+
+// --- RESPO-100 ---
+const RESPO100 = {
+    list: Array.from({length:100}, (_,i)=>`RESPO-${i}`),
+    load() { return this.list; },
+    shift() { this.list.push(this.list.shift()); }
+};
+
+// --- RESPO-360 ---
+const RESPO360 = {
+    list: Array.from({length:360}, (_,i)=>`DEG-${i}`),
+    load() { return this.list; },
+    rotate() { this.list.push(this.list.shift()); }
+};
+
+// --- 9×9 MATRIX ---
+const A81_AXIS = {
+    build() {
+        return Array.from({length:9},()=>Array(9).fill(0));
+    }
+};
+
+// --- GEO ---
+const GEO = {
+    init() { return { axes:"3-6-9", lage:"ORBIT" }; }
+};
+
+// --- PQ243 ---
+const PQ243 = {
+    run() { return Date.now() % 243; }
+};
+
+// --- C81 ---
+const C81 = {
+    init() { return { room:"81" }; }
+};
+
+// --- NC_CORE ---
+const NC_CORE = {
+    init(c81, r360, pq243, cache, matrix9, geo) {
+        return {
+            c81, r360, pq243, cache, matrix9, geo,
+            status:"active"
+        };
+    }
+};
+
+// --- A81-FUSION ---
+const A81FUSION = {
+    cache: [],
+    respo100: [],
+    respo360: [],
+    matrix9: [],
+    geo: null,
+    nc: null,
+    c81: null,
+    pq243: null,
+
+    init() {
+        this.cache = A81CACHE.read();
+        this.respo100 = RESPO100.load();
+        this.respo360 = RESPO360.load();
+        this.matrix9 = A81_AXIS.build();
+        this.geo = GEO.init();
+        this.c81 = C81.init();
+        this.pq243 = PQ243.run();
+
+        this.nc = NC_CORE.init(
+            this.c81,
+            this.respo360,
+            this.pq243,
+            this.cache,
+            this.matrix9,
+            this.geo
+        );
+
+        this.loop();
+    },
+
+    loop() {
+        setInterval(() => {
+            this.updateCache();
+            this.updateRespo();
+            this.updateMatrix();
+            this.updateUI();
+        }, 500);
+    },
+
+    updateCache() {
+        this.cache = A81CACHE.read();
+    },
+
+    updateRespo() {
+        RESPO360.rotate();
+        RESPO100.shift();
+    },
+
+    updateMatrix() {
+        this.matrix9 = A81_AXIS.build();
+    },
+
+    updateUI() {
+        const el = document.getElementById("a81-status");
+        if (el) el.textContent =
+            `A81CACHE: ${this.cache.length} · RESPO: ${this.respo100.length}`;
+    }
+};
+
+A81FUSION.init();
+</script>
